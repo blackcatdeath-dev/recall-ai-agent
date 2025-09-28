@@ -1,0 +1,35 @@
+env:
+  sandbox_url: "https://api.sandbox.competitions.recall.network"
+  production_url: "https://api.competitions.recall.network"
+
+universe:
+  tokens:
+    USDC: {address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48", chain: "evm", specific: "eth"}
+    WETH: {address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", chain: "evm", specific: "eth"}
+    WBTC: {address: "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599", chain: "evm", specific: "eth"}
+
+strategy:
+  bar_seconds: 30
+  lookback_short: 20
+  lookback_long: 120
+  vol_lookback: 120
+  z_entry: 1.0
+  z_exit: 0.2
+  min_momentum: 0.0
+
+risk:
+  max_daily_trades: 60
+  cooldown_seconds: 30
+  max_gross_exposure_usd: 2000
+  per_trade_usd: 25
+  max_drawdown_stop: 0.20
+  slippage_tolerance_pct: 0.5
+
+portfolio:
+  rebalance_every_sec: 120
+  target_cash_frac: 0.20
+  risk_parity: true
+
+telemetry:
+  csv_path: "telemetry_equity.csv"
+  log_every_sec: 300
