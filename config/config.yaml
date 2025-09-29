@@ -2,34 +2,79 @@ env:
   sandbox_url: "https://api.sandbox.competitions.recall.network"
   production_url: "https://api.competitions.recall.network"
 
-universe:
-  tokens:
-    USDC: {address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48", chain: "evm", specific: "eth"}
-    WETH: {address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", chain: "evm", specific: "eth"}
-    WBTC: {address: "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599", chain: "evm", specific: "eth"}
+chains:
+  - name: "eth"
+    chain: "evm"
+    specific: "eth"
+    starting_usdc: 5000
+  - name: "polygon"
+    chain: "evm"
+    specific: "polygon"
+    starting_usdc: 5000
+  - name: "bsc"
+    chain: "evm"
+    specific: "bsc"
+    starting_usdc: 5000
+  - name: "arbitrum"
+    chain: "evm"
+    specific: "arbitrum"
+    starting_usdc: 5000
+  - name: "base"
+    chain: "evm"
+    specific: "base"
+    starting_usdc: 5000
+  - name: "optimism"
+    chain: "evm"
+    specific: "optimism"
+    starting_usdc: 5000
+  - name: "avalanche"
+    chain: "evm"
+    specific: "avalanche"
+    starting_usdc: 5000
+  - name: "solana"
+    chain: "solana"
+    specific: "mainnet"
+    starting_usdc: 5000
+
+token_filters:
+  min_age_hours: 4380
+  min_24h_volume_usd: 500000
+  min_liquidity_usd: 500000
+  min_fdv_usd: 1000000
 
 strategy:
-  bar_seconds: 30
+  bar_seconds: 45
   lookback_short: 20
-  lookback_long: 120
-  vol_lookback: 120
-  z_entry: 1.0
-  z_exit: 0.2
-  min_momentum: 0.0
+  lookback_long: 100
+  vol_lookback: 80
+  z_entry: 1.2
+  z_exit: 0.3
+  min_momentum: 0.005
+  momentum_threshold: 0.01
 
 risk:
-  max_daily_trades: 60
-  cooldown_seconds: 30
-  max_gross_exposure_usd: 2000
-  per_trade_usd: 25
-  max_drawdown_stop: 0.20
-  slippage_tolerance_pct: 0.5
-
+  min_daily_trades: 3
+  max_daily_trades: 120
+  cooldown_seconds: 20
+  max_single_trade_pct: 0.25
+  per_trade_base_usd: 100
+  max_drawdown_stop: 0.18
+  slippage_tolerance_pct: 1.0
+  max_exposure_per_asset_pct: 0.35
+  
 portfolio:
-  rebalance_every_sec: 120
-  target_cash_frac: 0.20
+  rebalance_every_sec: 180
+  target_cash_frac: 0.15
   risk_parity: true
-
+  max_assets: 8
+  
 telemetry:
   csv_path: "telemetry_equity.csv"
   log_every_sec: 300
+
+rate_limits:
+  trade_operations: 100
+  price_queries: 300
+  balance_checks: 30
+  global_rpm: 3000
+  global_rph: 10000
